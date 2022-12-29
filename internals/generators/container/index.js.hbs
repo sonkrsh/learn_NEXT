@@ -16,7 +16,7 @@ import { FormattedMessage } from 'react-intl';
 import { createStructuredSelector } from 'reselect';
 {{/if}}
 import { compose } from 'redux';
-
+import { wrapper } from "utils/configureStore";
 {{#if wantSaga}}
 import { useInjectSaga } from 'utils/injectSaga';
 {{/if}}
@@ -49,6 +49,11 @@ export function {{ name }}() {
     </div>
   );
 }
+
+
+export const getStaticProps = wrapper.getStaticProps((store) => () => {
+  // store.dispatch();
+});
 
 {{ name }}.propTypes = {
   dispatch: PropTypes.func.isRequired,
