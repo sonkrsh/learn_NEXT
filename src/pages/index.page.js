@@ -10,7 +10,7 @@ import reducer from "./reducer";
 import { compose } from "redux";
 import makeSelectOne from "./selectors";
 import { useRouter } from "next/router";
-
+import { wrapper } from "../configureStore";
 import saga from "./saga";
 import { defaultAction } from "./actions";
 function index(props) {
@@ -20,15 +20,9 @@ function index(props) {
   useInjectSaga({ key: "one", saga });
   console.log("call propps", props);
 
-  const product = {
-    name: "i Phone",
-    category: "mobile",
-    price: 10000,
-    color: "red",
-  };
   return (
     <div className="App">
-      <h1>hello</h1>
+      <h1>{props.one.data}</h1>
       <button
         onClick={() => {
           newGame();
@@ -40,6 +34,11 @@ function index(props) {
     </div>
   );
 }
+export const getStaticProps = wrapper.getStaticProps((store) => () => {
+  console.log("===engZZ", store);
+  store.dispatch(defaultAction());
+  // store.dispatch(addCount());
+});
 
 const mapStateToProps = createStructuredSelector({
   one: makeSelectOne(),
@@ -47,7 +46,7 @@ const mapStateToProps = createStructuredSelector({
 
 function mapDispatchToProps(dispatch) {
   return {
-    newGame: (evt) => dispatch(defaultAction()),
+    newGame: (evt) => dispatch(defaultAction(1)),
   };
 }
 

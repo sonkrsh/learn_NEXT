@@ -1,13 +1,7 @@
-import { Provider } from "react-redux";
-import configureStore from "../configureStore";
+import { wrapper } from "../configureStore";
 
-export default function App({ Component, pageProps }) {
-  const initialState = {};
-  const store = configureStore(initialState);
+const WrappedApp = ({ Component, pageProps }) => {
+  return <Component {...pageProps} />;
+};
 
-  return (
-    <Provider store={store}>
-      <Component {...pageProps} />
-    </Provider>
-  );
-}
+export default wrapper.withRedux(WrappedApp);
