@@ -7,6 +7,7 @@ import { HYDRATE, createWrapper } from "next-redux-wrapper";
 import { routerMiddleware } from "connected-react-router";
 import createSagaMiddleware from "redux-saga";
 import createReducer from "reducers";
+import rootSaga from "./sagas";
 
 export default function configureStore(initialState = {}, history) {
   let composeEnhancers = compose;
@@ -35,17 +36,13 @@ export default function configureStore(initialState = {}, history) {
       return createReducer()(state, action);
     }
   };
-
-  const store = createStore(
-    reducer,
-    initialState,
-    composeEnhancers(...enhancers)
-  );
+  const store = createStore(reducer, composeEnhancers(...enhancers));
+  store.sagaTask = sagaMiddleware.run(rootSaga);
 
   // Extensions
-  store.runSaga = sagaMiddleware.run;
-  store.injectedReducers = {}; // Reducer registry
-  store.injectedSagas = {}; // Saga registry
+  // store.runSaga = sagaMiddleware.run;
+  // store.injectedReducers = {}; // Reducer registry
+  // store.injectedSagas = {}; // Saga registry
 
   // if (module.hot) {
   //   module.hot.accept("./reducers", () => {
