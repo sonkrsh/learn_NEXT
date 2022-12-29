@@ -22,18 +22,7 @@ module.exports = {
         return "The name is required";
       },
     },
-    {
-      type: "confirm",
-      name: "memo",
-      default: false,
-      message: "Do you want to wrap your component in React.memo?",
-    },
-    {
-      type: "confirm",
-      name: "wantHeaders",
-      default: false,
-      message: "Do you want headers?",
-    },
+
     {
       type: "confirm",
       name: "wantActionsAndReducer",
@@ -49,12 +38,6 @@ module.exports = {
     },
     {
       type: "confirm",
-      name: "wantMessages",
-      default: true,
-      message: "Do you want i18n messages (i.e. will this component use text)?",
-    },
-    {
-      type: "confirm",
       name: "wantLoadable",
       default: true,
       message: "Do you want to load resources asynchronously?",
@@ -65,30 +48,12 @@ module.exports = {
     const actions = [
       {
         type: "add",
-        path: "../../src/pages/{{properCase name}}/index.js",
+        path: "../../src/pages/{{properCase name}}/index.page.js",
         templateFile: "./container/index.js.hbs",
-        abortOnFail: true,
-      },
-      {
-        type: "add",
-        path: "../../src/pages/{{properCase name}}/tests/index.test.js",
-        templateFile: "./container/test.js.hbs",
         abortOnFail: true,
       },
     ];
 
-    // If component wants messages
-    if (data.wantMessages) {
-      actions.push({
-        type: "add",
-        path: "../../src/pages/{{properCase name}}/messages.js",
-        templateFile: "./container/messages.js.hbs",
-        abortOnFail: true,
-      });
-    }
-
-    // If they want actions and a reducer, generate actions.js, constants.js,
-    // reducer.js and the corresponding tests for actions and the reducer
     if (data.wantActionsAndReducer) {
       // Actions
       actions.push({
@@ -97,13 +62,6 @@ module.exports = {
         templateFile: "./container/actions.js.hbs",
         abortOnFail: true,
       });
-      actions.push({
-        type: "add",
-        path: "../../src/pages/{{properCase name}}/tests/actions.test.js",
-        templateFile: "./container/actions.test.js.hbs",
-        abortOnFail: true,
-      });
-
       // Constants
       actions.push({
         type: "add",
@@ -119,24 +77,12 @@ module.exports = {
         templateFile: "./container/selectors.js.hbs",
         abortOnFail: true,
       });
-      actions.push({
-        type: "add",
-        path: "../../src/pages/{{properCase name}}/tests/selectors.test.js",
-        templateFile: "./container/selectors.test.js.hbs",
-        abortOnFail: true,
-      });
 
       // Reducer
       actions.push({
         type: "add",
         path: "../../src/pages/{{properCase name}}/reducer.js",
         templateFile: "./container/reducer.js.hbs",
-        abortOnFail: true,
-      });
-      actions.push({
-        type: "add",
-        path: "../../src/pages/{{properCase name}}/tests/reducer.test.js",
-        templateFile: "./container/reducer.test.js.hbs",
         abortOnFail: true,
       });
     }
@@ -147,12 +93,6 @@ module.exports = {
         type: "add",
         path: "../../src/pages/{{properCase name}}/saga.js",
         templateFile: "./container/saga.js.hbs",
-        abortOnFail: true,
-      });
-      actions.push({
-        type: "add",
-        path: "../../src/pages/{{properCase name}}/tests/saga.test.js",
-        templateFile: "./container/saga.test.js.hbs",
         abortOnFail: true,
       });
     }

@@ -1,9 +1,3 @@
-/**
- * Component Generator
- */
-
-/* eslint strict: ["off"] */
-
 "use strict";
 
 const componentExists = require("../utils/componentExists");
@@ -26,18 +20,7 @@ module.exports = {
         return "The name is required";
       },
     },
-    {
-      type: "confirm",
-      name: "memo",
-      default: false,
-      message: "Do you want to wrap your component in React.memo?",
-    },
-    {
-      type: "confirm",
-      name: "wantMessages",
-      default: true,
-      message: "Do you want i18n messages (i.e. will this component use text)?",
-    },
+
     {
       type: "confirm",
       name: "wantLoadable",
@@ -54,23 +37,7 @@ module.exports = {
         templateFile: "./component/index.js.hbs",
         abortOnFail: true,
       },
-      {
-        type: "add",
-        path: "../../src/components/{{properCase name}}/tests/index.test.js",
-        templateFile: "./component/test.js.hbs",
-        abortOnFail: true,
-      },
     ];
-
-    // If the user wants i18n messages
-    if (data.wantMessages) {
-      actions.push({
-        type: "add",
-        path: "../../src/components/{{properCase name}}/messages.js",
-        templateFile: "./component/messages.js.hbs",
-        abortOnFail: true,
-      });
-    }
 
     // If the user wants Loadable.js to load the component asynchronously
     if (data.wantLoadable) {

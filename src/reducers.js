@@ -1,7 +1,5 @@
 import { combineReducers } from "redux";
-import { connectRouter } from "connected-react-router";
-import count from "./pages/reducer";
-import History from "./utils/history";
+import count from "src/pages/reducer";
 
 export default function createReducer(injectedReducers = {}) {
   const rootReducer = combineReducers({

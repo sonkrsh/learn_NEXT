@@ -9,7 +9,6 @@ import { useInjectReducer } from "../utils/injectReducer";
 import reducer from "./reducer";
 import { compose } from "redux";
 import makeSelectOne from "./selectors";
-import { useRouter } from "next/router";
 import { wrapper } from "../configureStore";
 import saga from "./saga";
 import { defaultAction } from "./actions";
@@ -18,7 +17,6 @@ function index(props) {
 
   useInjectReducer({ key: "one", reducer });
   useInjectSaga({ key: "one", saga });
-  console.log("call propps", props);
 
   return (
     <div className="App">
@@ -26,7 +24,6 @@ function index(props) {
       <button
         onClick={() => {
           newGame();
-          // props.router.push("/mine");
         }}
       >
         Add To Cart
@@ -35,9 +32,7 @@ function index(props) {
   );
 }
 export const getStaticProps = wrapper.getStaticProps((store) => () => {
-  console.log("===engZZ", store);
   store.dispatch(defaultAction());
-  // store.dispatch(addCount());
 });
 
 const mapStateToProps = createStructuredSelector({
@@ -46,7 +41,7 @@ const mapStateToProps = createStructuredSelector({
 
 function mapDispatchToProps(dispatch) {
   return {
-    newGame: (evt) => dispatch(defaultAction(1)),
+    newGame: (evt) => dispatch(defaultAction()),
   };
 }
 

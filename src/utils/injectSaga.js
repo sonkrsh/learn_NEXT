@@ -2,7 +2,7 @@ import React from "react";
 
 import { ReactReduxContext } from "react-redux";
 
-import getInjectors from "./sagaInjectors";
+import getInjectors from "src/utils/sagaInjectors";
 
 const useInjectSaga = ({ key, saga, mode }) => {
   const context = React.useContext(ReactReduxContext);

@@ -10,11 +10,6 @@ export const defaultAction = () => {
   return { type: DEFAULT_ACTION };
 };
 
-// export const addCount = () => (dispatch) => {
-//   console.log("action ccal");
-//   return dispatch({ type: countActionTypes.ADD });
-// };
-
 export function defaultActionUpdate() {
   console.log("call action update");
   return {
