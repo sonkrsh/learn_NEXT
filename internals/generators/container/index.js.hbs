@@ -1,9 +1,4 @@
-/**
- *
- * {{properCase name }}
- *
- */
-
+/* eslint-disable react-hooks/rules-of-hooks */
 {{#if memo}}
 import React, { memo } from 'react';
 {{else}}
@@ -26,9 +21,7 @@ import { compose } from 'redux';
 import { useInjectSaga } from 'utils/injectSaga';
 {{/if}}
 {{#if wantActionsAndReducer}}
-import { useInjectReducer } from 'utils/injectReducer';
-import makeSelect{{properCase name}} from './selectors';
-import reducer from './reducer';
+import makeSelect{{name}} from './selectors';
 {{/if}}
 {{#if wantSaga}}
 import saga from './saga';
@@ -37,10 +30,7 @@ import saga from './saga';
 import messages from './messages';
 {{/if}}
 
-export function {{ properCase name }}() {
-  {{#if wantActionsAndReducer}}
-  useInjectReducer({ key: '{{ camelCase name }}', reducer });
-  {{/if}}
+export function {{ name }}() {
   {{#if wantSaga}}
   useInjectSaga({ key: '{{ camelCase name }}', saga });
   {{/if}}
@@ -49,8 +39,8 @@ export function {{ properCase name }}() {
     <div>
     {{#if wantHeaders}}
       <Helmet>
-        <title>{{properCase name}}</title>
-        <meta name="description" content="Description of {{properCase name}}" />
+        <title>{{name}}</title>
+        <meta name="description" content="Description of {{name}}" />
       </Helmet>
     {{/if}}
     {{#if wantMessages}}
@@ -60,13 +50,13 @@ export function {{ properCase name }}() {
   );
 }
 
-{{ properCase name }}.propTypes = {
+{{ name }}.propTypes = {
   dispatch: PropTypes.func.isRequired,
 };
 
 {{#if wantActionsAndReducer}}
 const mapStateToProps = createStructuredSelector({
-  {{ camelCase name }}: makeSelect{{properCase name}}(),
+  {{ camelCase name }}: makeSelect{{name}}(),
 });
 {{/if}}
 
@@ -87,4 +77,4 @@ export default compose(
 {{#if memo}}
   memo,
 {{/if}}
-)({{ properCase name }});
+)({{ name }});

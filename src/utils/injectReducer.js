@@ -2,7 +2,7 @@ import React from "react";
 
 import { ReactReduxContext } from "react-redux";
 
-import getInjectors from "src/utils/reducerInjectors";
+import getInjectors from "utils/reducerInjectors";
 
 const useInjectReducer = ({ key, reducer }) => {
   const context = React.useContext(ReactReduxContext);

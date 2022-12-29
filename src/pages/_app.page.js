@@ -1,6 +1,6 @@
-import { wrapper } from "../configureStore";
+import { wrapper } from "configureStore";
 
-const WrappedApp = ({ Component, pageProps }) => {
+const WrappedApp = ({ Component, pageProps, router }) => {
   return <Component {...pageProps} />;
 };
 

@@ -48,7 +48,7 @@ module.exports = {
     const actions = [
       {
         type: "add",
-        path: "../../src/pages/{{properCase name}}/index.page.js",
+        path: "../../src/pages/{{name}}/index.page.js",
         templateFile: "./container/index.js.hbs",
         abortOnFail: true,
       },
@@ -105,6 +105,18 @@ module.exports = {
         abortOnFail: true,
       });
     }
+    actions.push({
+      type: "modify",
+      pattern: /(\/\/ ADD_REDUCER)/g,
+      path: "../../src/reducers.js",
+      templateFile: "./container/addreducer.hbs",
+    });
+    actions.push({
+      type: "modify",
+      pattern: /(\/\/ REDUCER_IMPORT)/g,
+      path: "../../src/reducers.js",
+      templateFile: "./container/reducerimport.hbs",
+    });
 
     actions.push({
       type: "prettify",

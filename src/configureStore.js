@@ -6,7 +6,7 @@ import { createStore, applyMiddleware, compose, combineReducers } from "redux";
 import { HYDRATE, createWrapper } from "next-redux-wrapper";
 import { routerMiddleware } from "connected-react-router";
 import createSagaMiddleware from "redux-saga";
-import createReducer from "src/reducers";
+import createReducer from "reducers";
 
 export default function configureStore(initialState = {}, history) {
   let composeEnhancers = compose;
