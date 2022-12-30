@@ -6,6 +6,7 @@ import { createStore, applyMiddleware, compose, combineReducers } from "redux";
 import { HYDRATE, createWrapper } from "next-redux-wrapper";
 import { routerMiddleware } from "connected-react-router";
 import createSagaMiddleware from "redux-saga";
+import pick from "lodash/pick";
 import createReducer from "reducers";
 import rootSaga from "./sagas";
 
@@ -26,10 +27,20 @@ export default function configureStore(initialState = {}, history) {
 
   const reducer = (state, action) => {
     if (action.type === HYDRATE) {
-      const nextState = {
-        ...state,
-        ...action.payload,
-      };
+      let nextState = null;
+      if (action.payload) {
+        const currentRoute = pick(action.payload, [action.payload.route.route]);
+        nextState = {
+          ...state,
+          ...currentRoute,
+        };
+      } else {
+        nextState = {
+          ...state,
+          ...action.payload,
+        };
+      }
+
       // if (state.count.count) nextState.count.count = state.count.count // preserve count value on client side navigation
       return nextState;
     } else {
@@ -54,6 +65,6 @@ export default function configureStore(initialState = {}, history) {
 }
 
 export const wrapper = createWrapper(configureStore, {
-  serializeState: (state) => JSON.stringify(state),
-  deserializeState: (state) => JSON.parse(state),
+  // serializeState: (state) => JSON.stringify(state),
+  // deserializeState: (state) => typeof state != "object" && JSON.parse(state),
 });

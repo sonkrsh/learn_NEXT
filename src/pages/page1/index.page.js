@@ -8,13 +8,26 @@ import { compose } from "redux";
 import { wrapper } from "configureStore";
 
 import makeSelectpage1 from "./selectors";
+import { useRouter } from "next/router";
 import { handleDemoUrl } from "./actions";
 
 export function page1(props) {
+  const router = useRouter();
+  console.log("page 1 call");
   const {
     handleClick,
     page1: { demoValue, arrayValue },
   } = props;
+
+  const handleClickNew = (e, path) => {
+    e.preventDefault();
+
+    if (path === "/page2") {
+      console.log("I clicked on the About Page");
+      // then you can:
+      router.push(path);
+    }
+  };
 
   return (
     <>
@@ -24,6 +37,7 @@ export function page1(props) {
       {arrayValue.map((item) => (
         <h1 key={item.name}>{item.name}</h1>
       ))}
+      <button onClick={(e) => handleClickNew(e, "/page2")}>Go to Page2</button>
     </>
   );
 }
@@ -37,12 +51,11 @@ export function page1(props) {
 // );
 
 export const getServerSideProps = wrapper.getServerSideProps(
-  (store) =>
-    async ({ req, res }) => {
-      await store.dispatch(handleDemoUrl(req));
-      await store.dispatch(END);
-      await store.sagaTask.toPromise();
-    }
+  (store) => async () => {
+    await store.dispatch(handleDemoUrl());
+    await store.dispatch(END);
+    await store.sagaTask.toPromise();
+  }
 );
 
 page1.propTypes = {

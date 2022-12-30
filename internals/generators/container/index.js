@@ -48,7 +48,7 @@ module.exports = {
     const actions = [
       {
         type: "add",
-        path: "../../src/pages/{{name}}/index.page.js",
+        path: "../../src/pages/{{camelCase name}}/index.page.js",
         templateFile: "./container/index.js.hbs",
         abortOnFail: true,
       },
