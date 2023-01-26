@@ -19,9 +19,9 @@ function* handleDemo({ payload }) {
     // });
     const data = yield res.json();
     // const data2 = yield res2.json();
-    // console.log("===>>>aaa", data2);
+    console.log("===>>>saga");
 
-    yield put(handleRoute("page1"));
+    // yield put(handleRoute("page1"));
     yield put(handleDemoUrlSuccess(data));
   } catch (error) {}
 }

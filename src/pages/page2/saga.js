@@ -8,7 +8,7 @@ function* handleApi({ payload }) {
     const res = yield fetch("http://localhost:4000/products");
     const data = yield res.json();
 
-    yield put(handleRoute("page2"));
+    // yield put(handleRoute("page2"));
     yield put(handleApiSuccess(data));
   } catch (error) {}
 }

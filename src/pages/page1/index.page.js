@@ -1,19 +1,22 @@
 /* eslint-disable react-hooks/rules-of-hooks */
-import React from "react";
+import React, { useEffect } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
 import { END } from "redux-saga";
 import { compose } from "redux";
 import { wrapper } from "configureStore";
-
+import { useInjectReducer } from "../../utils/injectReducer";
+import reducer from "./reducer";
 import makeSelectpage1 from "./selectors";
 import { useRouter } from "next/router";
 import { handleDemoUrl } from "./actions";
 
 export function page1(props) {
+  // useInjectReducer({ key: "page1", reducer });
+
   const router = useRouter();
-  console.log("page 1 call");
+  console.log("page 1 call", props);
   const {
     handleClick,
     page1: { demoValue, arrayValue },
@@ -28,6 +31,10 @@ export function page1(props) {
       router.push(path);
     }
   };
+
+  useEffect(() => {
+    // handleClick();
+  }, []);
 
   return (
     <>
@@ -52,6 +59,7 @@ export function page1(props) {
 
 export const getServerSideProps = wrapper.getServerSideProps(
   (store) => async () => {
+    useInjectReducer({ key: "page1", reducer, store });
     await store.dispatch(handleDemoUrl());
     await store.dispatch(END);
     await store.sagaTask.toPromise();

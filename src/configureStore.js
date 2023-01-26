@@ -26,34 +26,24 @@ export default function configureStore(initialState = {}, history) {
   const enhancers = [applyMiddleware(...middlewares)];
 
   const reducer = (state, action) => {
-    if (action.type === HYDRATE) {
-      let nextState = null;
-      if (action.payload) {
-        const currentRoute = pick(action.payload, [action.payload.route.route]);
-        nextState = {
-          ...state,
-          ...currentRoute,
-        };
-      } else {
-        nextState = {
-          ...state,
-          ...action.payload,
-        };
-      }
+    console.log("iiiiiiiiiiAAAAAA", state);
 
-      // if (state.count.count) nextState.count.count = state.count.count // preserve count value on client side navigation
-      return nextState;
-    } else {
-      return createReducer()(state, action);
+    console.log("iiiiiiiiii", action);
+    if (action.type === HYDRATE) {
+      return {
+        ...state,
+        ...action.payload,
+      };
     }
+    return createReducer()(state, action);
   };
   const store = createStore(reducer, composeEnhancers(...enhancers));
   store.sagaTask = sagaMiddleware.run(rootSaga);
 
   // Extensions
-  // store.runSaga = sagaMiddleware.run;
-  // store.injectedReducers = {}; // Reducer registry
-  // store.injectedSagas = {}; // Saga registry
+  store.runSaga = sagaMiddleware.run;
+  store.injectedReducers = {}; // Reducer registry
+  store.injectedSagas = {}; // Saga registry
 
   // if (module.hot) {
   //   module.hot.accept("./reducers", () => {

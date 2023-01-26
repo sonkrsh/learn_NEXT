@@ -7,8 +7,8 @@ import page2 from "pages/page2/reducer";
 export default function createReducer(injectedReducers = {}) {
   const rootReducer = combineReducers({
     route,
-    page1,
-    page2,
+    // page1,
+    // page2,
     // ADD_REDUCER
     ...injectedReducers,
   });
