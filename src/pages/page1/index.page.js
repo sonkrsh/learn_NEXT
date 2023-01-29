@@ -9,7 +9,7 @@ import { wrapper } from "configureStore";
 
 import makeSelectpage1 from "./selectors";
 import { useRouter } from "next/router";
-import { handleDemoUrl } from "./actions";
+import { handleDemoUrl, handleIncr } from "./actions";
 
 export function page1(props) {
   const router = useRouter();
@@ -69,7 +69,7 @@ const mapStateToProps = createStructuredSelector({
 function mapDispatchToProps(dispatch) {
   return {
     dispatch,
-    handleClick: (evt) => dispatch(handleDemoUrl()),
+    handleClick: (evt) => dispatch(handleIncr()),
   };
 }
 
