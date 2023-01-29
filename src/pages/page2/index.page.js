@@ -37,7 +37,7 @@ export function page2(props) {
   );
 }
 
-page2.getInitialProps = wrapper.getInitialPageProps(
+export const getServerSideProps = wrapper.getServerSideProps(
   (store, s) => async (eee) => {
     await store.dispatch(handleApi());
     await store.dispatch(END);

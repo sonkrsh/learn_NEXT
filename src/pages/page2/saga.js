@@ -5,7 +5,7 @@ import { handleRoute } from "pages/actions";
 
 function* handleApi({ payload }) {
   try {
-    const res = yield fetch("http://localhost:4000/products");
+    const res = yield fetch("https://jsonplaceholder.typicode.com/users");
     const data = yield res.json();
 
     yield put(handleRoute("page2"));
