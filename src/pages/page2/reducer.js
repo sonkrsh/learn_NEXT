@@ -1,6 +1,6 @@
 import produce from "immer";
 import { HANDLE_API_SUCCESSS } from "./constants";
-
+import { HYDRATE } from "next-redux-wrapper";
 export const initialState = {
   data: [],
 };

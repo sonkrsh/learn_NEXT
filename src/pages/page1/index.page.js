@@ -13,6 +13,7 @@ import { handleDemoUrl, handleIncr } from "./actions";
 
 export function page1(props) {
   const router = useRouter();
+
   console.log("page 1 call");
   const {
     handleClick,
@@ -41,22 +42,12 @@ export function page1(props) {
     </>
   );
 }
-// // console.log("wrapper",wrapper);
-// export const getServerSideProps = wrapper.getServerSideProps(
-//   (store) => async () => {
-//     // console.log("==---REact", React.useContext);
-//     // console.log("==-->>>>>Bbb", store);
-//     await store.dispatch(handleDemoUrl());
-//   }
-// );
 
-export const getServerSideProps = wrapper.getServerSideProps(
-  (store) => async () => {
-    await store.dispatch(handleDemoUrl());
-    await store.dispatch(END);
-    await store.sagaTask.toPromise();
-  }
-);
+export const getStaticProps = wrapper.getStaticProps((store) => async () => {
+  await store.dispatch(handleDemoUrl());
+  await store.dispatch(END);
+  await store.sagaTask.toPromise();
+});
 
 page1.propTypes = {
   dispatch: PropTypes.func.isRequired,

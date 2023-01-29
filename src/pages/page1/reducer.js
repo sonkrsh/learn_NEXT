@@ -4,6 +4,7 @@ import {
   HANDLE_DEMO_URL_SUCCESS,
   HANDLE_INCR,
 } from "./constants";
+import { HYDRATE } from "next-redux-wrapper";
 
 export const initialState = {
   demoValue: 0,
@@ -14,6 +15,9 @@ export const initialState = {
 const page1Reducer = (state = initialState, action) =>
   produce(state, (draft) => {
     switch (action.type) {
+      case HYDRATE:
+        console.log("hydrate ccall");
+        break;
       case HANDLE_DEMO_URL_SUCCESS:
         draft.arrayValue = action.payload;
         break;

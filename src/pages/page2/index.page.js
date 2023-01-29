@@ -12,8 +12,9 @@ import { useRouter } from "next/router";
 import Link from "next/link";
 
 export function page2(props) {
-  console.log("page 2 call");
   const router = useRouter();
+
+  console.log("page 2 call");
   const {
     page2: { data },
   } = props;
