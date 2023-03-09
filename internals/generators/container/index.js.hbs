@@ -23,17 +23,8 @@ import { useInjectSaga } from 'utils/injectSaga';
 {{#if wantActionsAndReducer}}
 import makeSelect{{name}} from './selectors';
 {{/if}}
-{{#if wantSaga}}
-import saga from './saga';
-{{/if}}
-{{#if wantMessages}}
-import messages from './messages';
-{{/if}}
 
 export function {{ name }}() {
-  {{#if wantSaga}}
-  useInjectSaga({ key: '{{ camelCase name }}', saga });
-  {{/if}}
 
   return (
     <div>

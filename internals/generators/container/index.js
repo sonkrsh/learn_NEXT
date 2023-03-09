@@ -85,6 +85,19 @@ module.exports = {
         templateFile: "./container/reducer.js.hbs",
         abortOnFail: true,
       });
+
+      actions.push({
+        type: "modify",
+        pattern: /(\/\/ ADD_REDUCER)/g,
+        path: "../../src/reducers.js",
+        templateFile: "./container/addreducer.hbs",
+      });
+      actions.push({
+        type: "modify",
+        pattern: /(\/\/ REDUCER_IMPORT)/g,
+        path: "../../src/reducers.js",
+        templateFile: "./container/reducerimport.hbs",
+      });
     }
 
     // Sagas
@@ -94,6 +107,18 @@ module.exports = {
         path: "../../src/pages/{{properCase name}}/saga.js",
         templateFile: "./container/saga.js.hbs",
         abortOnFail: true,
+      });
+      actions.push({
+        type: "modify",
+        pattern: /(\/\/ ADD_SAGA)/g,
+        path: "../../src/sagas.js",
+        templateFile: "./container/addsaga.hbs",
+      });
+      actions.push({
+        type: "modify",
+        pattern: /(\/\/ SAGA_IMPORT)/g,
+        path: "../../src/sagas.js",
+        templateFile: "./container/sagaimport.hbs",
       });
     }
 
@@ -105,30 +130,6 @@ module.exports = {
         abortOnFail: true,
       });
     }
-    actions.push({
-      type: "modify",
-      pattern: /(\/\/ ADD_REDUCER)/g,
-      path: "../../src/reducers.js",
-      templateFile: "./container/addreducer.hbs",
-    });
-    actions.push({
-      type: "modify",
-      pattern: /(\/\/ REDUCER_IMPORT)/g,
-      path: "../../src/reducers.js",
-      templateFile: "./container/reducerimport.hbs",
-    });
-    actions.push({
-      type: "modify",
-      pattern: /(\/\/ ADD_SAGA)/g,
-      path: "../../src/sagas.js",
-      templateFile: "./container/addsaga.hbs",
-    });
-    actions.push({
-      type: "modify",
-      pattern: /(\/\/ SAGA_IMPORT)/g,
-      path: "../../src/sagas.js",
-      templateFile: "./container/sagaimport.hbs",
-    });
 
     actions.push({
       type: "prettify",
