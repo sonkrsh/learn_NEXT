@@ -7,7 +7,7 @@ function* rootSaga() {
   yield all([
     page1Saga(),
     page2Saga(),
-    // ADD_REDUCER
+    // ADD_SAGA
   ]);
 }
 
