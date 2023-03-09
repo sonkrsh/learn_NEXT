@@ -10,11 +10,11 @@ import { handleApi } from "./actions";
 import makeSelectpage2 from "./selectors";
 import { useRouter } from "next/router";
 import Link from "next/link";
+import makeSelectpage1 from "../page1/selectors";
 
 export function page2(props) {
   const router = useRouter();
 
-  console.log("page 2 call");
   const {
     page2: { data },
   } = props;
@@ -38,7 +38,7 @@ export function page2(props) {
   );
 }
 
-export const getServerSideProps = wrapper.getServerSideProps(
+export const getStaticProps = wrapper.getStaticProps(
   (store, s) => async (eee) => {
     await store.dispatch(handleApi());
     await store.dispatch(END);
@@ -52,6 +52,7 @@ page2.propTypes = {
 
 const mapStateToProps = createStructuredSelector({
   page2: makeSelectpage2(),
+  page1: makeSelectpage1(),
 });
 
 function mapDispatchToProps(dispatch) {

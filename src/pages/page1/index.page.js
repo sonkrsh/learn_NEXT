@@ -14,7 +14,6 @@ import { handleDemoUrl, handleIncr } from "./actions";
 export function page1(props) {
   const router = useRouter();
 
-  console.log("page 1 call");
   const {
     handleClick,
     page1: { demoValue, arrayValue },

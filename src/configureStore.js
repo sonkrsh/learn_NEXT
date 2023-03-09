@@ -2,11 +2,10 @@
  * Create the store with dynamic reducers
  */
 
-import { createStore, applyMiddleware, compose, combineReducers } from "redux";
-import { HYDRATE, createWrapper } from "next-redux-wrapper";
+import { createStore, applyMiddleware, compose } from "redux";
+import { createWrapper } from "next-redux-wrapper";
 import { routerMiddleware } from "connected-react-router";
 import createSagaMiddleware from "redux-saga";
-import pick from "lodash/pick";
 import createReducer from "reducers";
 import rootSaga from "./sagas";
 
@@ -26,21 +25,21 @@ export default function configureStore(initialState = {}, history) {
   const enhancers = [applyMiddleware(...middlewares)];
 
   const reducer = (state, action) => {
-    if (action.type === HYDRATE) {
-      return {
-        ...state,
-        ...action.payload,
-      };
-    }
+    // if (action.type === HYDRATE) {
+    //   return {
+    //     ...state,
+    //     ...action.payload,
+    //   };
+    // }
     return createReducer()(state, action);
   };
   const store = createStore(reducer, composeEnhancers(...enhancers));
   store.sagaTask = sagaMiddleware.run(rootSaga);
 
   // Extensions
-  // store.runSaga = sagaMiddleware.run;
-  // store.injectedReducers = {}; // Reducer registry
-  // store.injectedSagas = {}; // Saga registry
+  store.runSaga = sagaMiddleware.run;
+  store.injectedReducers = {}; // Reducer registry
+  store.injectedSagas = {}; // Saga registry
 
   // if (module.hot) {
   //   module.hot.accept("./reducers", () => {

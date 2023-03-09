@@ -16,7 +16,9 @@ const page1Reducer = (state = initialState, action) =>
   produce(state, (draft) => {
     switch (action.type) {
       case HYDRATE:
-        console.log("hydrate ccall");
+        if (action.payload.page1) {
+          draft.arrayValue = action.payload.page1.arrayValue;
+        }
         break;
       case HANDLE_DEMO_URL_SUCCESS:
         draft.arrayValue = action.payload;
