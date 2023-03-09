@@ -1,6 +1,6 @@
 import { all } from "redux-saga/effects";
-import page1Saga from "../src/pages/page1/saga";
-import page2Saga from "../src/pages/page2/saga";
+import page1Saga from "pages/page1/saga";
+import page2Saga from "pages/page2/saga";
 // SAGA_IMPORT
 
 function* rootSaga() {

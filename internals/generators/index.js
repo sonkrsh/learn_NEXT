@@ -38,9 +38,11 @@ module.exports = (plop) => {
       "**",
       "**.js"
     )}`;
+    const reduxAndSaga = `${path.join(__dirname, "/../../src/", "", "**.js")}`;
 
     try {
       execSync(`npm run prettify -- "${folderPath}"`);
+      execSync(`npm run prettify -- "${reduxAndSaga}"`);
       return folderPath;
     } catch (err) {
       throw err;
