@@ -120,13 +120,13 @@ module.exports = {
     actions.push({
       type: "modify",
       pattern: /(\/\/ ADD_SAGA)/g,
-      path: "../../src/reducers.js",
+      path: "../../src/saga.js",
       templateFile: "./container/addsaga.hbs",
     });
     actions.push({
       type: "modify",
       pattern: /(\/\/ SAGA_IMPORT)/g,
-      path: "../../src/reducers.js",
+      path: "../../src/saga.js",
       templateFile: "./container/sagaimport.hbs",
     });
 
