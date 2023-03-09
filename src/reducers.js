@@ -8,6 +8,7 @@ export default function createReducer(injectedReducers = {}) {
     page1,
     page2,
     // ADD_REDUCER
+
     ...injectedReducers,
   });
 

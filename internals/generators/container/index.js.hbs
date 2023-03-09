@@ -17,9 +17,6 @@ import { createStructuredSelector } from 'reselect';
 {{/if}}
 import { compose } from 'redux';
 import { wrapper } from "configureStore";
-{{#if wantSaga}}
-import { useInjectSaga } from 'utils/injectSaga';
-{{/if}}
 {{#if wantActionsAndReducer}}
 import makeSelect{{name}} from './selectors';
 {{/if}}
