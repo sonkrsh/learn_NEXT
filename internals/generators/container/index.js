@@ -117,6 +117,18 @@ module.exports = {
       path: "../../src/reducers.js",
       templateFile: "./container/reducerimport.hbs",
     });
+    actions.push({
+      type: "modify",
+      pattern: /(\/\/ ADD_SAGA)/g,
+      path: "../../src/reducers.js",
+      templateFile: "./container/addsaga.hbs",
+    });
+    actions.push({
+      type: "modify",
+      pattern: /(\/\/ SAGA_IMPORT)/g,
+      path: "../../src/reducers.js",
+      templateFile: "./container/sagaimport.hbs",
+    });
 
     actions.push({
       type: "prettify",
