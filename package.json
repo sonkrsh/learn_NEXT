@@ -12,6 +12,10 @@
     "serve-json": "json-server --watch db.json --port 4000"
   },
   "dependencies": {
+    "@emotion/react": "^11.10.6",
+    "@emotion/styled": "^11.10.6",
+    "@mui/icons-material": "^5.11.11",
+    "@mui/material": "^5.11.12",
     "@next/font": "13.1.1",
     "@reduxjs/toolkit": "^1.9.1",
     "axios": "^1.2.2",

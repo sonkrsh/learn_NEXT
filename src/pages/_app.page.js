@@ -1,7 +1,10 @@
 import { wrapper } from "configureStore";
 import { Provider } from "react-redux";
 
+import Box from "@mui/material/Box";
+import Toolbar from "@mui/material/Toolbar";
 import Header from "components/Header/Loadable";
+
 import "styles/global.scss";
 
 const App = ({ Component, ...rest }) => {
@@ -10,8 +13,11 @@ const App = ({ Component, ...rest }) => {
 
   return (
     <Provider store={store}>
-      <Header />
-      <Component {...pageProps} />
+      <Box component="main">
+        <Header />
+        <Toolbar />
+        <Component {...pageProps} />
+      </Box>
     </Provider>
   );
 };

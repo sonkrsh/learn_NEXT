@@ -12,7 +12,7 @@ import { useRouter } from "next/router";
 import { handleDemoUrl, handleIncr } from "./actions";
 
 export function page1(props) {
-  const router = useRouter();
+  // const router = useRouter();
 
   const {
     handleClick,
@@ -22,22 +22,22 @@ export function page1(props) {
   const handleClickNew = (e, path) => {
     e.preventDefault();
 
-    if (path === "/page2") {
-      console.log("I clicked on the About Page");
-      // then you can:
-      router.push(path);
-    }
+    // if (path === "/page2") {
+    //   console.log("I clicked on the About Page");
+    //   // then you can:
+    //   router.push(path);
+    // }
   };
 
   return (
     <>
       <div>hi</div>
       {demoValue}
-      <button onClick={() => handleClick()}>click me</button>
+      {/* <button onClick={() => handleClick()}>click me</button> */}
       {arrayValue.map((item) => (
         <h1 key={item.name}>{item.name}</h1>
       ))}
-      <button onClick={(e) => handleClickNew(e, "/page2")}>Go to Page2</button>
+      {/* <button onClick={(e) => handleClickNew(e, "/page2")}>Go to Page2</button> */}
     </>
   );
 }
