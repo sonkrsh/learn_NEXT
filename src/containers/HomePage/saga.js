@@ -6,7 +6,7 @@ function* handleClick({ payload }) {
   try {
     console.log("----payload saga", payload);
     const guess = Math.random();
-    yield put(defaultActionSucess("ccall from saga" + guess));
+    yield put(defaultActionSucess("ccall from saga" + guess, 1));
   } catch (error) {}
 }
 export default function* homePageSaga() {

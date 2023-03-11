@@ -4,18 +4,20 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
 import { compose } from "redux";
-import { wrapper } from "configureStore";
 import { defaultAction } from "./actions";
 import makeSelectHomePage from "./selectors";
 
 export function HomePage(props) {
   const {
     onclickHandler,
-    homePage: { data },
+    homePage: { data, servervalue },
   } = props;
-  console.log("---data", data);
+
   return (
     <div>
+      {data}
+      <br></br>
+      {servervalue}
       <button onClick={() => onclickHandler("click")}>click</button>
     </div>
   );

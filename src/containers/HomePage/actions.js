@@ -6,9 +6,10 @@ export function defaultAction(payload) {
     payload,
   };
 }
-export function defaultActionSucess(payload) {
+export function defaultActionSucess(payload, payload2) {
   return {
     type: DEFAULT_ACTION_SUCCESS,
     payload,
+    payload2,
   };
 }
