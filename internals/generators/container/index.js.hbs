@@ -21,7 +21,7 @@ import { wrapper } from "configureStore";
 import makeSelect{{name}} from './selectors';
 {{/if}}
 
-export function {{ name }}() {
+export function {{ properCase name }}() {
 
   return (
     <div>
@@ -38,18 +38,13 @@ export function {{ name }}() {
   );
 }
 
-
-export const getStaticProps = wrapper.getStaticProps((store) => () => {
-  // store.dispatch();
-});
-
-{{ name }}.propTypes = {
+{{ properCase name }}.propTypes = {
   dispatch: PropTypes.func.isRequired,
 };
 
 {{#if wantActionsAndReducer}}
 const mapStateToProps = createStructuredSelector({
-  {{ camelCase name }}: makeSelect{{name}}(),
+  {{ camelCase name }}: makeSelect{{properCase name}}(),
 });
 {{/if}}
 
@@ -70,4 +65,4 @@ export default compose(
 {{#if memo}}
   memo,
 {{/if}}
-)({{ name }});
+)({{ properCase name }});
