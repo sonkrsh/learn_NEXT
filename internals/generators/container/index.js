@@ -48,7 +48,7 @@ module.exports = {
     const actions = [
       {
         type: "add",
-        path: "../../src/pages/{{camelCase name}}/index.page.js",
+        path: "../../src/containers/{{camelCase name}}/index.page.js",
         templateFile: "./container/index.js.hbs",
         abortOnFail: true,
       },
@@ -58,14 +58,14 @@ module.exports = {
       // Actions
       actions.push({
         type: "add",
-        path: "../../src/pages/{{properCase name}}/actions.js",
+        path: "../../src/containers/{{properCase name}}/actions.js",
         templateFile: "./container/actions.js.hbs",
         abortOnFail: true,
       });
       // Constants
       actions.push({
         type: "add",
-        path: "../../src/pages/{{properCase name}}/constants.js",
+        path: "../../src/containers/{{properCase name}}/constants.js",
         templateFile: "./container/constants.js.hbs",
         abortOnFail: true,
       });
@@ -73,7 +73,7 @@ module.exports = {
       // Selectors
       actions.push({
         type: "add",
-        path: "../../src/pages/{{properCase name}}/selectors.js",
+        path: "../../src/containers/{{properCase name}}/selectors.js",
         templateFile: "./container/selectors.js.hbs",
         abortOnFail: true,
       });
@@ -81,7 +81,7 @@ module.exports = {
       // Reducer
       actions.push({
         type: "add",
-        path: "../../src/pages/{{properCase name}}/reducer.js",
+        path: "../../src/containers/{{properCase name}}/reducer.js",
         templateFile: "./container/reducer.js.hbs",
         abortOnFail: true,
       });
@@ -104,7 +104,7 @@ module.exports = {
     if (data.wantSaga) {
       actions.push({
         type: "add",
-        path: "../../src/pages/{{properCase name}}/saga.js",
+        path: "../../src/containers/{{properCase name}}/saga.js",
         templateFile: "./container/saga.js.hbs",
         abortOnFail: true,
       });
@@ -125,7 +125,7 @@ module.exports = {
     if (data.wantLoadable) {
       actions.push({
         type: "add",
-        path: "../../src/pages/{{properCase name}}/Loadable.js",
+        path: "../../src/containers/{{properCase name}}/Loadable.js",
         templateFile: "./component/loadable.js.hbs",
         abortOnFail: true,
       });
@@ -133,7 +133,7 @@ module.exports = {
 
     actions.push({
       type: "prettify",
-      path: "/pages/",
+      path: "/containers/",
     });
 
     return actions;

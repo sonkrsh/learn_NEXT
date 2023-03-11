@@ -71,7 +71,7 @@ function Header(props) {
           </Typography>
           <Box sx={{ display: { xs: "none", sm: "block" } }}>
             {navItems.map((item) => (
-              <Link key={item} href={"/page1"}>
+              <Link key={item} href={"/page1_server"}>
                 <Button key={item} sx={{ color: "#fff" }}>
                   {item}
                 </Button>
