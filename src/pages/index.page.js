@@ -3,6 +3,7 @@ import HomePage from "containers/HomePage/Loadable";
 import { END } from "redux-saga";
 import { wrapper } from "configureStore";
 import { defaultAction } from "containers/HomePage/actions";
+import Image from "next/image";
 
 const index = () => {
   return (

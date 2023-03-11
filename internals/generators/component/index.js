@@ -27,6 +27,12 @@ module.exports = {
       default: false,
       message: "Do you want to load the component asynchronously?",
     },
+    {
+      type: "confirm",
+      name: "memo",
+      default: false,
+      message: "Do you want to add the memo ?",
+    },
   ],
   actions: (data) => {
     // Generate index.js and index.test.js

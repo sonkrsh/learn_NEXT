@@ -6,7 +6,7 @@ import { createStructuredSelector } from "reselect";
 import { compose } from "redux";
 import { defaultAction } from "./actions";
 import makeSelectHomePage from "./selectors";
-
+import LandingPageFirstSection from "components/LandingPageFirstSection";
 export function HomePage(props) {
   const {
     onclickHandler,
@@ -15,10 +15,11 @@ export function HomePage(props) {
 
   return (
     <div>
-      {data}
+      {/* {data}
       <br></br>
       {servervalue}
-      <button onClick={() => onclickHandler("click")}>click</button>
+      <button onClick={() => onclickHandler("click")}>click</button> */}
+      <LandingPageFirstSection />
     </div>
   );
 }
