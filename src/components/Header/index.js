@@ -17,7 +17,11 @@ import Button from "@mui/material/Button";
 import Link from "next/link";
 
 const drawerWidth = 240;
-const navItems = ["Home", "About", "Contact"];
+const navItems = [
+  { name: "Home", path: "/" },
+  { name: "About", path: "/page1" },
+  { name: "Contact", path: "/page2" },
+];
 
 function Header(props) {
   const { window } = props;
@@ -34,10 +38,10 @@ function Header(props) {
       </Typography>
       <Divider />
       <List>
-        {navItems.map((item) => (
-          <ListItem key={item} disablePadding>
+        {navItems.map((item, keey) => (
+          <ListItem key={keey} disablePadding>
             <ListItemButton sx={{ textAlign: "center" }}>
-              <ListItemText primary={item} />
+              <ListItemText primary={item.name} />
             </ListItemButton>
           </ListItem>
         ))}
@@ -70,11 +74,9 @@ function Header(props) {
             MUI
           </Typography>
           <Box sx={{ display: { xs: "none", sm: "block" } }}>
-            {navItems.map((item) => (
-              <Link key={item} href={"/page1_server"}>
-                <Button key={item} sx={{ color: "#fff" }}>
-                  {item}
-                </Button>
+            {navItems.map((item, key) => (
+              <Link key={key} href={item.path}>
+                <Button sx={{ color: "#fff" }}>{item.name}</Button>
               </Link>
             ))}
           </Box>
