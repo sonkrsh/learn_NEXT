@@ -1,10 +1,9 @@
 import produce from "immer";
-import { DEFAULT_ACTION, DEFAULT_ACTION_SUCCESS } from "./constants";
+import { GET_CAR_COMPANY_SUCCESS } from "./constants";
 import { HYDRATE } from "next-redux-wrapper";
 
 export const initialState = {
-  data: "",
-  servervalue: 0,
+  cardata: [],
 };
 
 /* eslint-disable default-case, no-param-reassign */
@@ -13,15 +12,11 @@ const homePageReducer = (state = initialState, action) =>
     switch (action.type) {
       case HYDRATE:
         if (action.payload.homePage) {
-          draft.data = action.payload.homePage.data;
-          draft.servervalue = action.payload.homePage.servervalue;
+          draft.cardata = action.payload.homePage.cardata;
         }
         break;
-      case DEFAULT_ACTION_SUCCESS:
-        draft.data = action.payload;
-        draft.servervalue = action.payload2;
-        break;
-      case DEFAULT_ACTION:
+      case GET_CAR_COMPANY_SUCCESS:
+        draft.cardata = action.payload;
         break;
     }
   });

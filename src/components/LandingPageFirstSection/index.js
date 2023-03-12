@@ -9,7 +9,7 @@ import CarModelFuelForm from "components/CarModelFuelForm";
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
 
-function LandingPageFirstSection() {
+function LandingPageFirstSection({ cardata }) {
   return (
     <>
       <div className="LandingPageFirstSection_style">
@@ -43,7 +43,7 @@ function LandingPageFirstSection() {
               </Typography>
             </Grid>
             <Grid item xs={12} sm={12} md={6} lg={4}>
-              <CarModelFuelForm />
+              <CarModelFuelForm cardata={cardata} />
             </Grid>
           </Grid>
         </Container>

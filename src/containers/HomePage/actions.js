@@ -1,15 +1,14 @@
-import { DEFAULT_ACTION, DEFAULT_ACTION_SUCCESS } from "./constants";
+import { GET_CAR_COMPANY, GET_CAR_COMPANY_SUCCESS } from "./constants";
 
-export function defaultAction(payload) {
+export function getCarCompany(payload) {
   return {
-    type: DEFAULT_ACTION,
+    type: GET_CAR_COMPANY,
     payload,
   };
 }
-export function defaultActionSucess(payload, payload2) {
+export function getCarCompanySuccess(payload) {
   return {
-    type: DEFAULT_ACTION_SUCCESS,
+    type: GET_CAR_COMPANY_SUCCESS,
     payload,
-    payload2,
   };
 }

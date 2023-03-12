@@ -9,24 +9,23 @@ import makeSelectHomePage from "./selectors";
 import LandingPageFirstSection from "components/LandingPageFirstSection";
 export function HomePage(props) {
   const {
-    onclickHandler,
-    homePage: { data, servervalue },
+    homePage: { cardata },
   } = props;
 
+  console.log("-->>", cardata);
   return (
     <div>
       {/* {data}
       <br></br>
       {servervalue}
       <button onClick={() => onclickHandler("click")}>click</button> */}
-      <LandingPageFirstSection />
+      <LandingPageFirstSection cardata={cardata} />
     </div>
   );
 }
 
 HomePage.propTypes = {
   dispatch: PropTypes.func.isRequired,
-  onclickHandler: PropTypes.func,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -36,7 +35,6 @@ const mapStateToProps = createStructuredSelector({
 function mapDispatchToProps(dispatch) {
   return {
     dispatch,
-    onclickHandler: (evt) => dispatch(defaultAction(evt)),
   };
 }
 

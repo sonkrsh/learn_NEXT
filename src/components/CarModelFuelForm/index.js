@@ -12,21 +12,21 @@ import TextField from "@mui/material/TextField";
 import Autocomplete from "@mui/material/Autocomplete";
 import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
+import { find, isEqual } from "lodash";
 
-const top100Films = [
-  { title: "The Shawshank Redemption", year: 1994 },
-  { title: "The Godfather", year: 1972 },
-  { title: "The Godfather: Part II", year: 1974 },
-  { title: "The Dark Knight", year: 2008 },
-  { title: "12 Angry Men", year: 1957 },
-];
+function CarModelFuelForm({ cardata }) {
+  const carProps = {
+    options: cardata,
+    getOptionLabel: (option) => option.name,
+  };
 
-const defaultProps = {
-  options: top100Films,
-  getOptionLabel: (option) => option.title,
-};
-console.log("---form");
-function CarModelFuelForm() {
+  const filterModel = (carValue) => {
+    const data = find(cardata, (item) =>
+      isEqual(item?.carCompany_uuid, carValue)
+    );
+    return data.carModels;
+  };
+
   const onSave = (e) => {
     console.log("---value", e);
   };
@@ -51,8 +51,9 @@ function CarModelFuelForm() {
             <>
               <Autocomplete
                 disablePortal
-                onSelect={handleChange("car")}
-                {...defaultProps}
+                onChange={(e, v) => setFieldValue("car", v.carCompany_uuid)}
+                value={values.car}
+                {...carProps}
                 renderInput={(params) => {
                   return (
                     <TextField
@@ -67,8 +68,9 @@ function CarModelFuelForm() {
               {values.car && (
                 <Autocomplete
                   disablePortal
+                  options={filterModel(values.car)}
+                  getOptionLabel={(option) => option.name}
                   onSelect={handleChange("model")}
-                  {...defaultProps}
                   renderInput={(params) => {
                     return (
                       <TextField
