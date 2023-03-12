@@ -12,7 +12,6 @@ const homePageReducer = (state = initialState, action) =>
   produce(state, (draft) => {
     switch (action.type) {
       case HYDRATE:
-        console.log("---action", action);
         if (action.payload.homePage) {
           draft.data = action.payload.homePage.data;
           draft.servervalue = action.payload.homePage.servervalue;

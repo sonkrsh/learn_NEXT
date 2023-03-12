@@ -51,7 +51,7 @@ function Header(props) {
 
   const container =
     window !== undefined ? () => window().document.body : undefined;
-  console.log("---hello");
+
   return (
     <Box sx={{ display: "flex" }}>
       <CssBaseline />
