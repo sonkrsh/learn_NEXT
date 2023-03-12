@@ -1,7 +1,6 @@
-@import './mixins';
-
-$primary-color: #64ff00;
-
+@import 'mixins';
+@import 'colors';
+@import 'ownGlobal';
 
 .text {
   color: $primary-color;

@@ -17,7 +17,7 @@ function CustomImage() {
       // height={100}
       quality={40}
       // placeholder="blur"
-
+      className="img_not_shown_in_mobile"
       priority
     />
   );
