@@ -12,7 +12,7 @@ import TextField from "@mui/material/TextField";
 import Autocomplete from "@mui/material/Autocomplete";
 import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
-import { find, isEqual } from "lodash";
+import { find, get, isEqual } from "lodash";
 
 function CarModelFuelForm({ cardata }) {
   const carProps = {
@@ -51,45 +51,78 @@ function CarModelFuelForm({ cardata }) {
             <>
               <Autocomplete
                 disablePortal
-                onChange={(e, v) => setFieldValue("car", v.carCompany_uuid)}
-                value={values.car}
+                onChange={(e, v) => {
+                  setFieldValue("car", {
+                    name: get(v, "name", ""),
+                    id: get(v, "carCompany_uuid", ""),
+                  });
+                  setFieldValue("model", {
+                    name: "",
+                    id: "",
+                  });
+                }}
+                inputValue={get(values, "car.name", "")}
+                // value={get(values, "car.id", "")}
                 {...carProps}
                 renderInput={(params) => {
                   return (
                     <TextField
                       {...params}
-                      error={!!errors.car}
-                      label={values.car ? "Selected Car" : "Please Select car"}
+                      error={!!errors.car?.name}
+                      label={
+                        get(values, "car.name")
+                          ? "Selected Car"
+                          : "Please Select car"
+                      }
                     />
                   );
                 }}
               />
 
-              {values.car && (
+              {/* {values.car?.name && (
                 <Autocomplete
                   disablePortal
-                  options={filterModel(values.car)}
-                  getOptionLabel={(option) => option.name}
-                  onSelect={handleChange("model")}
+                  options={filterModel(values.car?.id)}
+                  getOptionLabel={(option) => option.name || ""}
+                  onChange={(e, v) => {
+                    setFieldValue("model", {
+                      name: get(v, "name", ""),
+                      id: get(v, "carModel_uuid", ""),
+                    });
+                    // setFieldValue("fuel", {
+                    //   name: "",
+                    //   id: "",
+                    // });
+                  }}
+                  inputValue={get(values, "model.name", "")}
+                  // value={values.model?.id || ""}
                   renderInput={(params) => {
                     return (
                       <TextField
                         {...params}
-                        error={!!errors.model}
+                        error={!!errors.model?.name}
                         label={
-                          values.model ? "Seleted Model" : "Please Select Model"
+                          get(values, "model.name")
+                            ? "Seleted Model"
+                            : "Please Select Model"
                         }
                       />
                     );
                   }}
                 />
-              )}
+              )} */}
 
-              {values.model && values.car && (
+              {/* {values.model?.name && values.car?.name && (
                 <Autocomplete
                   disablePortal
-                  onSelect={handleChange("fuel")}
-                  {...defaultProps}
+                  onChange={(e, v) => {
+                    setFieldValue("fuel", {
+                      name: v?.name,
+                      id: v?.carModel_uuid,
+                    });
+                  }}
+                  {...carProps}
+                  inputValue={values.fuel?.name}
                   renderInput={(params) => {
                     return (
                       <TextField
@@ -102,7 +135,7 @@ function CarModelFuelForm({ cardata }) {
                     );
                   }}
                 />
-              )}
+              )} */}
 
               <Button onClick={handleSubmit} variant="outlined">
                 Search

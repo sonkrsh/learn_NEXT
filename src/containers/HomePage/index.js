@@ -12,7 +12,7 @@ export function HomePage(props) {
     homePage: { cardata },
   } = props;
 
-  console.log("-->>", cardata);
+
   return (
     <div>
       {/* {data}
