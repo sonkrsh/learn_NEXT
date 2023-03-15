@@ -12,7 +12,7 @@ import TextField from "@mui/material/TextField";
 import Autocomplete from "@mui/material/Autocomplete";
 import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
-import { find, get, isEqual } from "lodash";
+import { find, get, isEmpty, isEqual } from "lodash";
 
 function CarModelFuelForm({ cardata }) {
   const carProps = {
@@ -49,6 +49,7 @@ function CarModelFuelForm({ cardata }) {
             touched,
           }) => (
             <>
+              {console.log("errorr", errors)}
               <Autocomplete
                 disablePortal
                 onChange={(e, v) => {
@@ -62,13 +63,12 @@ function CarModelFuelForm({ cardata }) {
                   });
                 }}
                 inputValue={get(values, "car.name", "")}
-                // value={get(values, "car.id", "")}
                 {...carProps}
                 renderInput={(params) => {
                   return (
                     <TextField
                       {...params}
-                      error={!!errors.car?.name}
+                      error={!isEmpty(errors.car?.id)}
                       label={
                         get(values, "car.name")
                           ? "Selected Car"
@@ -79,7 +79,7 @@ function CarModelFuelForm({ cardata }) {
                 }}
               />
 
-              {/* {values.car?.name && (
+              {values.car?.name && (
                 <Autocomplete
                   disablePortal
                   options={filterModel(values.car?.id)}
@@ -100,7 +100,7 @@ function CarModelFuelForm({ cardata }) {
                     return (
                       <TextField
                         {...params}
-                        error={!!errors.model?.name}
+                        error={!isEmpty(errors.model?.id)}
                         label={
                           get(values, "model.name")
                             ? "Seleted Model"
@@ -110,7 +110,7 @@ function CarModelFuelForm({ cardata }) {
                     );
                   }}
                 />
-              )} */}
+              )}
 
               {/* {values.model?.name && values.car?.name && (
                 <Autocomplete
