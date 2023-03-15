@@ -14,9 +14,14 @@ import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
 import { find, get, isEmpty, isEqual } from "lodash";
 
-function CarModelFuelForm({ cardata }) {
+function CarModelFuelForm({ cardata, fuelData }) {
   const carProps = {
     options: cardata,
+    getOptionLabel: (option) => option.name,
+  };
+
+  const fuelProps = {
+    options: fuelData,
     getOptionLabel: (option) => option.name,
   };
 
@@ -49,7 +54,6 @@ function CarModelFuelForm({ cardata }) {
             touched,
           }) => (
             <>
-              {console.log("errorr", errors)}
               <Autocomplete
                 disablePortal
                 onChange={(e, v) => {
@@ -89,10 +93,10 @@ function CarModelFuelForm({ cardata }) {
                       name: get(v, "name", ""),
                       id: get(v, "carModel_uuid", ""),
                     });
-                    // setFieldValue("fuel", {
-                    //   name: "",
-                    //   id: "",
-                    // });
+                    setFieldValue("fuel", {
+                      name: "",
+                      id: "",
+                    });
                   }}
                   inputValue={get(values, "model.name", "")}
                   // value={values.model?.id || ""}
@@ -112,16 +116,16 @@ function CarModelFuelForm({ cardata }) {
                 />
               )}
 
-              {/* {values.model?.name && values.car?.name && (
+              {values.model?.name && values.car?.name && (
                 <Autocomplete
                   disablePortal
                   onChange={(e, v) => {
                     setFieldValue("fuel", {
-                      name: v?.name,
-                      id: v?.carModel_uuid,
+                      name: get(v, "name", ""),
+                      id: get(v, "carFuel_uuid", ""),
                     });
                   }}
-                  {...carProps}
+                  {...fuelProps}
                   inputValue={values.fuel?.name}
                   renderInput={(params) => {
                     return (
@@ -135,7 +139,7 @@ function CarModelFuelForm({ cardata }) {
                     );
                   }}
                 />
-              )} */}
+              )}
 
               <Button onClick={handleSubmit} variant="outlined">
                 Search

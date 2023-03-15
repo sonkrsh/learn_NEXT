@@ -9,9 +9,8 @@ import makeSelectHomePage from "./selectors";
 import LandingPageFirstSection from "components/LandingPageFirstSection";
 export function HomePage(props) {
   const {
-    homePage: { cardata },
+    homePage: { cardata, fuelData },
   } = props;
-
 
   return (
     <div>
@@ -19,7 +18,7 @@ export function HomePage(props) {
       <br></br>
       {servervalue}
       <button onClick={() => onclickHandler("click")}>click</button> */}
-      <LandingPageFirstSection cardata={cardata} />
+      <LandingPageFirstSection cardata={cardata} fuelData={fuelData} />
     </div>
   );
 }
