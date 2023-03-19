@@ -2,6 +2,7 @@ import { call, put, takeLatest } from "redux-saga/effects";
 import { GET_CAR_COMPANY } from "./constants";
 import request from "utils/request";
 import { get } from "lodash";
+import { handleRoute } from "pages/actions";
 import { getCarCompanySuccess, getCarFuelSuccess } from "./actions";
 
 function* getCarCompany({ payload }) {
@@ -18,6 +19,7 @@ function* getCarCompany({ payload }) {
     };
     const response2 = yield call(request, options2);
 
+    yield put(handleRoute("homePage"));
     yield put(getCarCompanySuccess(get(response, "data.data")));
     yield put(getCarFuelSuccess(get(response2, "data.data")));
   } catch (error) {

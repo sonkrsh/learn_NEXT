@@ -12,8 +12,11 @@ const detailPageReducer = (state = initialState, action) =>
   produce(state, (draft) => {
     switch (action.type) {
       case HYDRATE:
-        draft.tags = action.payload.detailPage.tags;
-        draft.products = action.payload.detailPage.products;
+        if (action.payload.detailPage) {
+          draft.tags = action.payload.detailPage.tags;
+          draft.products = action.payload.detailPage.products;
+        }
+
         break;
 
       case GET_TAGS_SUCCESS:

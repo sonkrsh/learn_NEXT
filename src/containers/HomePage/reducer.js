@@ -12,8 +12,11 @@ const homePageReducer = (state = initialState, action) =>
   produce(state, (draft) => {
     switch (action.type) {
       case HYDRATE:
-        draft.cardata = action.payload.homePage.cardata;
-        draft.fuelData = action.payload.homePage.fuelData;
+        if (action.payload.homePage) {
+          draft.cardata = action.payload.homePage.cardata;
+          draft.fuelData = action.payload.homePage.fuelData;
+        }
+
         break;
       case GET_CAR_COMPANY_SUCCESS:
         draft.cardata = action.payload;
