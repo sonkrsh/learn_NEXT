@@ -9,6 +9,7 @@ export const carModelFuelFormSchema = Yup.object().shape({
   model: Yup.object().shape({
     id: Yup.string().required("model is required"),
   }),
-  // model: Yup.string().required("model is required"),
-  // fuel: Yup.string().required("model is required"),
+  fuel: Yup.object().shape({
+    id: Yup.string().required("model is required"),
+  }),
 });

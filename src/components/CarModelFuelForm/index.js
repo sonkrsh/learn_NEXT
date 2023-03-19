@@ -13,8 +13,11 @@ import Autocomplete from "@mui/material/Autocomplete";
 import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
 import { find, get, isEmpty, isEqual } from "lodash";
+import { useRouter } from "next/router";
 
 function CarModelFuelForm({ cardata, fuelData }) {
+  const router = useRouter();
+
   const carProps = {
     options: cardata,
     getOptionLabel: (option) => option.name,
@@ -33,8 +36,9 @@ function CarModelFuelForm({ cardata, fuelData }) {
   };
 
   const onSave = (e) => {
-    console.log("---value", e);
+    router.push(`/${e.car.name}/${e.model.name}/${e.fuel.name}`);
   };
+
   return (
     <Card variant="outlined" className={"cardModelFuelForm_style"}>
       <Stack spacing={1} sx={{ width: "100%" }}>
@@ -131,9 +135,11 @@ function CarModelFuelForm({ cardata, fuelData }) {
                     return (
                       <TextField
                         {...params}
-                        error={!!errors.fuel}
+                        error={!isEmpty(errors.fuel?.id)}
                         label={
-                          values.fuel ? "Selected Fuel" : "Please Select Fuel"
+                          get(values, "fuel.name")
+                            ? "Selected Fuel"
+                            : "Please Select Fuel"
                         }
                       />
                     );
