@@ -9,8 +9,8 @@ import makeSelectDetailPage from "./selectors";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import { get, map } from "lodash";
-import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
+import CustomCard from "components/CustomCard/Loadable";
 
 export function DetailPage(props) {
   const {
@@ -35,7 +35,7 @@ export function DetailPage(props) {
       >
         {value === index && (
           <Box sx={{ p: 3 }}>
-            <Typography>{children}</Typography>
+            <div>{children}</div>
           </Box>
         )}
       </div>
@@ -68,7 +68,7 @@ export function DetailPage(props) {
       </Box>
 
       <TabPanel value={value} index={0}>
-        Item One
+        <CustomCard />
       </TabPanel>
       <TabPanel value={value} index={1}>
         Item Two
