@@ -4,7 +4,7 @@
  *
  */
 
-import React, { memo } from "react";
+import React, { memo, useCallback } from "react";
 import { Formik } from "formik";
 import { carModelFuelFormSchema } from "utils/validationSchema";
 import Card from "@mui/material/Card";
@@ -32,7 +32,8 @@ function CarModelFuelForm({ cardata, fuelData }) {
     const data = find(cardata, (item) =>
       isEqual(item?.carCompany_uuid, carValue)
     );
-    return data.carModels;
+
+    return get(data, "carModels", "");
   };
 
   const onSave = (e) => {

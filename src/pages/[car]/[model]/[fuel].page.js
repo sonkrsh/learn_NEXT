@@ -1,6 +1,9 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import React from "react";
-
+import { getTags, getProducts } from "containers/DetailPage/actions";
+import { END } from "redux-saga";
+import { get } from "lodash";
+import { wrapper } from "configureStore";
 import DetailPage from "containers/DetailPage/Loadable";
 
 const page = () => {
@@ -11,11 +14,13 @@ const page = () => {
   );
 };
 
-export async function getServerSideProps(context) {
-  console.log("--context", context.query);
-  return {
-    props: {}, // will be passed to the page component as props
-  };
-}
+export const getServerSideProps = wrapper.getServerSideProps(
+  (store) => async (context) => {
+    await store.dispatch(getTags());
+    await store.dispatch(getProducts(get(context, "query")));
+    await store.dispatch(END);
+    await store.sagaTask.toPromise();
+  }
+);
 
 export default page;

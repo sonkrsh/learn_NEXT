@@ -15,6 +15,9 @@ export function HomePage(props) {
     homePage: { cardata, fuelData },
   } = props;
 
+  console.log("---homePage cardata", cardata);
+  console.log("---homePage fuelData", fuelData);
+
   return (
     <div className="LandingPageFirstSection_style">
       <Container maxWidth="xl">

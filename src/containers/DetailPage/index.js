@@ -8,15 +8,20 @@ import makeSelectDetailPage from "./selectors";
 
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
-
+import { get, map } from "lodash";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 
-export function DetailPage() {
+export function DetailPage(props) {
+  const {
+    detailPage: { tags, products },
+  } = props;
+
   const [value, setvalue] = useState(0);
   const handleChange = (event, newValue) => {
     setvalue(newValue);
   };
+  console.log("---products", products);
 
   const TabPanel = (props) => {
     const { children, value, index, ...other } = props;
@@ -53,11 +58,16 @@ export function DetailPage() {
           onChange={handleChange}
           aria-label="basic tabs example"
         >
-          <Tab label="Item One" {...a11yProps(0)} />
-          <Tab label="Item Two" {...a11yProps(1)} />
-          <Tab label="Item Three" {...a11yProps(2)} />
+          {map(tags, (item, index) => (
+            <Tab
+              key={index}
+              label={get(item, "name", "")}
+              {...a11yProps(index)}
+            />
+          ))}
         </Tabs>
       </Box>
+
       <TabPanel value={value} index={0}>
         Item One
       </TabPanel>

@@ -1,13 +1,26 @@
 import produce from "immer";
-import { DEFAULT_ACTION } from "./constants";
+import { GET_TAGS_SUCCESS, GET_PRODUCTS_SUCCESS } from "./constants";
+import { HYDRATE } from "next-redux-wrapper";
 
-export const initialState = {};
+export const initialState = {
+  tags: [],
+  products: [],
+};
 
 /* eslint-disable default-case, no-param-reassign */
 const detailPageReducer = (state = initialState, action) =>
-  produce(state, (/* draft */) => {
+  produce(state, (draft) => {
     switch (action.type) {
-      case DEFAULT_ACTION:
+      case HYDRATE:
+        draft.tags = action.payload.detailPage.tags;
+        draft.products = action.payload.detailPage.products;
+        break;
+
+      case GET_TAGS_SUCCESS:
+        draft.tags = action.payload;
+        break;
+      case GET_PRODUCTS_SUCCESS:
+        draft.products = action.payload;
         break;
     }
   });
