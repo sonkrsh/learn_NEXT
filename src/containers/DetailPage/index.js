@@ -21,7 +21,6 @@ export function DetailPage(props) {
   const handleChange = (event, newValue) => {
     setvalue(newValue);
   };
-  console.log("---products", products);
 
   const TabPanel = (props) => {
     const { children, value, index, ...other } = props;
