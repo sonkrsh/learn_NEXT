@@ -8,9 +8,10 @@ import makeSelectDetailPage from "./selectors";
 
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
-import { get, map } from "lodash";
+import { get, isEqual, map, filter } from "lodash";
 import Box from "@mui/material/Box";
 import CustomCard from "components/CustomCard/Loadable";
+import CardContainer from "./CardContainer";
 
 export function DetailPage(props) {
   const {
@@ -49,11 +50,17 @@ export function DetailPage(props) {
     };
   };
 
+  const filterProducts = (tagName) => {
+    return filter(products, (item) =>
+      isEqual(get(item, "carService.servicesTag.name"), tagName)
+    );
+  };
   return (
     <>
       <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
         <Tabs
           value={value}
+          variant="scrollable"
           onChange={handleChange}
           aria-label="basic tabs example"
         >
@@ -66,16 +73,11 @@ export function DetailPage(props) {
           ))}
         </Tabs>
       </Box>
-
-      <TabPanel value={value} index={0}>
-        <CustomCard />
-      </TabPanel>
-      <TabPanel value={value} index={1}>
-        Item Two
-      </TabPanel>
-      <TabPanel value={value} index={2}>
-        Item Three
-      </TabPanel>
+      {map(tags, (item, index) => (
+        <TabPanel key={index} value={value} index={index}>
+          <CardContainer data={filterProducts(get(item, "name", ""))} />
+        </TabPanel>
+      ))}
     </>
   );
 }

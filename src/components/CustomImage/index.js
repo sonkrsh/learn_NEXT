@@ -8,7 +8,7 @@
 import React, { memo } from "react";
 import Image from "next/image";
 
-function CustomImage({ url, width, height, alt, style }) {
+function CustomImage({ url, width, height, alt, style, is_shown_in_mobile }) {
   return (
     <Image
       src={
@@ -21,7 +21,7 @@ function CustomImage({ url, width, height, alt, style }) {
       quality={40}
       alt={alt || "__Test_"}
       // placeholder="blur"
-      className="img_not_shown_in_mobile"
+      className={is_shown_in_mobile ? "" : "img_not_shown_in_mobile"}
       priority
       style={style}
     />

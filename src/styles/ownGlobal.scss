@@ -1,7 +1,10 @@
 .img_not_shown_in_mobile {
     @include xs {
-
         display: none;
+    }
+
+    @include md {
+        display: block;
     }
 
     @include lg {
