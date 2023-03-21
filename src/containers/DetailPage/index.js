@@ -10,7 +10,6 @@ import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import { get, isEqual, map, filter } from "lodash";
 import Box from "@mui/material/Box";
-import CustomCard from "components/CustomCard/Loadable";
 import CardContainer from "./CardContainer";
 
 export function DetailPage(props) {

@@ -6,11 +6,8 @@ import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
 import { compose } from "redux";
 import makeSelectHomePage from "./selectors";
-import Grid from "@mui/material/Grid";
 import CarModelFuelForm from "components/CarModelFuelForm";
-import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
-import CustomImage from "components/CustomImage";
 export function HomePage(props) {
   const {
     homePage: { cardata, fuelData },
