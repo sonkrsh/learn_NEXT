@@ -4,14 +4,54 @@
  *
  */
 
-import React, { memo } from "react";
+import React, { memo, useState, useEffect } from "react";
 import Button from "@mui/material/Button";
 import CustomImage from "components/CustomImage";
-import { get, map } from "lodash";
+import localForage from "localforage";
+import { get, isEmpty, map, find, isEqual } from "lodash";
+import Message from "components/Message";
 
 function CustomCard({ data }) {
+  const [open, setOpen] = React.useState(false);
+  const [isFound, setisFound] = useState(false);
+
+  const addToCart = async () => {
+    const previousData = await localForage.getItem("automobileCrunch");
+    let combineData = null;
+    if (!isEmpty(previousData)) {
+      combineData = {
+        products_uuid: [
+          data.products_uuid,
+          ...get(previousData, "products_uuid"),
+        ],
+      };
+    } else {
+      combineData = {
+        products_uuid: [data.products_uuid],
+      };
+    }
+
+    await localForage.setItem("automobileCrunch", combineData);
+
+    setOpen(true);
+  };
+
+  const isInLocalStorage = async (currentId) => {
+    const s = await localForage.getItem("automobileCrunch");
+
+    let isFind =
+      find(s?.products_uuid, (item) => isEqual(currentId, item)) || false;
+
+    return setisFound(!!isFind);
+  };
+
+  useEffect(() => {
+    isInLocalStorage(get(data, "products_uuid"));
+  }, [open]);
+
   return (
     <div className="container-fluid mb-2">
+      {open && <Message>Added To Cart</Message>}
       <div className="card">
         <div className="card-body">
           <div className="row">
@@ -55,7 +95,9 @@ function CustomCard({ data }) {
             </div>
 
             <div className="col-sm-10 col-lg-10 col-xl-10 d-flex flex-row-reverse">
-              <Button variant="outlined">Add To Cart</Button>
+              <Button disabled={isFound} onClick={addToCart} variant="outlined">
+                Add To Cart
+              </Button>
             </div>
           </div>
         </div>

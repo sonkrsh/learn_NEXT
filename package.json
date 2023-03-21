@@ -27,6 +27,7 @@
     "history": "^5.3.0",
     "immer": "^9.0.16",
     "invariant": "^2.2.4",
+    "localforage": "^1.10.0",
     "lodash": "^4.17.21",
     "next": "13.1.1",
     "next-redux-wrapper": "git+https://github.com/sonkrsh/redux_WIP.git",
