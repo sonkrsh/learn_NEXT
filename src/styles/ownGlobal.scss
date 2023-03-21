@@ -1,24 +1,8 @@
-.img_not_shown_in_mobile {
-    @include xs {
-        display: none;
-    }
-
-    @include md {
-        display: block;
-    }
-
-    @include lg {
-        display: block;
-    }
-}
-
 .LandingPageFirstSection_style {
-    position: absolute;
     align-items: center;
     height: 90vh;
     display: flex;
     background: linear-gradient(180.2deg, rgb(30, 33, 48) 6.8%, rgb(74, 98, 110) 131%);
-    width: 100%
 }
 
 .cardModelFuelForm_style {

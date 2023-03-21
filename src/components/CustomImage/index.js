@@ -21,7 +21,6 @@ function CustomImage({ url, width, height, alt, style, is_shown_in_mobile }) {
       quality={40}
       alt={alt || "__Test_"}
       // placeholder="blur"
-      className={is_shown_in_mobile ? "" : "img_not_shown_in_mobile"}
       priority
       style={style}
     />

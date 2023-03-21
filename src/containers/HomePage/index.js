@@ -18,9 +18,9 @@ export function HomePage(props) {
 
   return (
     <div className="LandingPageFirstSection_style">
-      <Container maxWidth="xl">
-        <Grid container>
-          <Grid item xs={12} sm={12} md={6} lg={8}>
+      <div className="container">
+        <div className="row">
+          <div className="col-sm-12 col-md-6 col-lg-7">
             <Typography
               style={{ fontWeight: 900, color: "white" }}
               fontSize={{
@@ -46,12 +46,13 @@ export function HomePage(props) {
               with our wide selection of high-quality accessories - all
               available at the click of a button!
             </Typography>
-          </Grid>
-          <Grid item xs={12} sm={12} md={6} lg={4}>
+          </div>
+
+          <div className="col-sm-12 col-md-6 col-lg-5">
             <CarModelFuelForm cardata={cardata} fuelData={fuelData} />
-          </Grid>
-        </Grid>
-      </Container>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }

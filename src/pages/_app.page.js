@@ -5,6 +5,7 @@ import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import Header from "components/Header/Loadable";
 
+import "bootstrap/dist/css/bootstrap.css";
 import "styles/global.scss";
 
 const App = ({ Component, ...rest }) => {
