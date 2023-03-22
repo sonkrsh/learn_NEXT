@@ -27,7 +27,7 @@ const Message = ({ variant, time, children }) => {
             bottom: 0,
             zIndex: 1,
           }}
-          class={`alert ${variant || "alert-primary"}`}
+          className={`alert ${variant || "alert-primary"}`}
           role="alert"
         >
           {children}

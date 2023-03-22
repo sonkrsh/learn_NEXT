@@ -4,16 +4,36 @@
  *
  */
 
-import React, { memo } from "react";
+import React, { memo, useRef } from "react";
 // import PropTypes from 'prop-types';
 // import styled from 'styled-components';
 import CustomImage from "components/CustomImage";
-import { get } from "lodash";
+import { get, isEqual, map } from "lodash";
 
-function SideCart({ perticularCar }) {
+function SideCart({ data, cartData }) {
+  const globalTotal = useRef(0);
+
   const computeName = (key) => {
-    return get(perticularCar, key, "");
+    return get(data?.[0], key, "");
   };
+
+  const filterData = () => {
+    const filterData = [];
+    let total = 0;
+    for (let i = 0; i < cartData?.length; i++) {
+      for (let j = 0; j < data?.length; j++) {
+        if (isEqual(get(data[j], "products_uuid"), cartData[i])) {
+          total += get(data[j], "price");
+          filterData.push(data[j]);
+        }
+      }
+    }
+
+    globalTotal.current = total;
+
+    return filterData;
+  };
+
   return (
     <div className="container-fluid mb-2">
       <div className="card">
@@ -32,6 +52,19 @@ function SideCart({ perticularCar }) {
             <p>{`${computeName("carCompany.name")} ${computeName(
               "carModel.name"
             )} ${computeName("carFuel.name")}`}</p>
+          </div>
+          {map(filterData(), (item) => (
+            <div className="card mt-2">
+              <div className="card-body">
+                <div className="d-flex justify-content-between">
+                  <h5>{get(item, "carService.name")}</h5>
+                  <p>{get(item, "price")}</p>
+                </div>
+              </div>
+            </div>
+          ))}
+          <div className="d-flex  justify-content-end ">
+            <p>Total:- {globalTotal.current}</p>
           </div>
         </div>
       </div>

@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/rules-of-hooks */
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
@@ -11,16 +11,23 @@ import Tab from "@mui/material/Tab";
 import { get, isEqual, map, filter } from "lodash";
 import Box from "@mui/material/Box";
 import CardContainer from "./CardContainer";
+import { addToCart, getLocalStorageData } from "./actions";
 
 export function DetailPage(props) {
   const {
-    detailPage: { tags, products },
+    detailPage: { tags, products, cartData },
+    handleAddToCart,
+    getLocalStorageData,
   } = props;
 
   const [value, setvalue] = useState(0);
   const handleChange = (event, newValue) => {
     setvalue(newValue);
   };
+
+  useEffect(() => {
+    getLocalStorageData([]);
+  }, []);
 
   const TabPanel = (props) => {
     const { children, value, index, ...other } = props;
@@ -54,6 +61,7 @@ export function DetailPage(props) {
       isEqual(get(item, "carService.servicesTag.name"), tagName)
     );
   };
+
   return (
     <>
       <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
@@ -74,7 +82,12 @@ export function DetailPage(props) {
       </Box>
       {map(tags, (item, index) => (
         <TabPanel key={index} value={value} index={index}>
-          <CardContainer data={filterProducts(get(item, "name", ""))} />
+          <CardContainer
+            data={filterProducts(get(item, "name", ""))}
+            handleAddToCart={handleAddToCart}
+            getLocalStorageData={getLocalStorageData}
+            cartData={cartData}
+          />
         </TabPanel>
       ))}
     </>
@@ -83,6 +96,8 @@ export function DetailPage(props) {
 
 DetailPage.propTypes = {
   dispatch: PropTypes.func.isRequired,
+  handleAddToCart: PropTypes.func,
+  getLocalStorageData: PropTypes.func,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -92,6 +107,8 @@ const mapStateToProps = createStructuredSelector({
 function mapDispatchToProps(dispatch) {
   return {
     dispatch,
+    handleAddToCart: (evt) => dispatch(addToCart(evt)),
+    getLocalStorageData: (evt) => dispatch(getLocalStorageData(evt)),
   };
 }
 

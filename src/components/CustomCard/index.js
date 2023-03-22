@@ -11,43 +11,23 @@ import localForage from "localforage";
 import { get, isEmpty, map, find, isEqual } from "lodash";
 import Message from "components/Message";
 
-function CustomCard({ data }) {
+function CustomCard({ data, handleAddToCart, cartData }) {
   const [open, setOpen] = React.useState(false);
-  const [isFound, setisFound] = useState(false);
 
   const addToCart = async () => {
-    const previousData = await localForage.getItem("automobileCrunch");
-    let combineData = null;
-    if (!isEmpty(previousData)) {
-      combineData = {
-        products_uuid: [
-          data.products_uuid,
-          ...get(previousData, "products_uuid"),
-        ],
-      };
-    } else {
-      combineData = {
-        products_uuid: [data.products_uuid],
-      };
-    }
-
-    await localForage.setItem("automobileCrunch", combineData);
-
     setOpen(true);
+
+    handleAddToCart([data.products_uuid]);
   };
 
-  const isInLocalStorage = async (currentId) => {
-    const s = await localForage.getItem("automobileCrunch");
-
-    let isFind =
-      find(s?.products_uuid, (item) => isEqual(currentId, item)) || false;
-
-    return setisFound(!!isFind);
+  const isButtonDisable = () => {
+    const isfind = find(cartData, (item) => {
+      if (isEqual(get(data, "products_uuid"), item)) {
+        return true;
+      }
+    });
+    return !!isfind;
   };
-
-  useEffect(() => {
-    isInLocalStorage(get(data, "products_uuid"));
-  }, [open]);
 
   return (
     <div className="container-fluid mb-2">
@@ -95,7 +75,11 @@ function CustomCard({ data }) {
             </div>
 
             <div className="col-sm-10 col-lg-10 col-xl-10 d-flex flex-row-reverse">
-              <Button disabled={isFound} onClick={addToCart} variant="outlined">
+              <Button
+                disabled={isButtonDisable()}
+                onClick={addToCart}
+                variant="outlined"
+              >
                 Add To Cart
               </Button>
             </div>
