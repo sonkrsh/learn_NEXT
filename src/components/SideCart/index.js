@@ -53,8 +53,8 @@ function SideCart({ data, cartData }) {
               "carModel.name"
             )} ${computeName("carFuel.name")}`}</p>
           </div>
-          {map(filterData(), (item) => (
-            <div className="card mt-2">
+          {map(filterData(), (item, key) => (
+            <div key={key} className="card mt-2">
               <div className="card-body">
                 <div className="d-flex justify-content-between">
                   <h5>{get(item, "carService.name")}</h5>

@@ -30,9 +30,11 @@ const App = ({ Component, ...rest }) => {
 
   const sendOTP = () => {
     let appVerifier = window.recaptchaVerifier;
-    signInWithPhoneNumber(authentication, "+919818351953", appVerifier)
+    signInWithPhoneNumber(authentication, "+919871616963", appVerifier)
       .then((confirmationResult) => {
         window.confirmationResult = confirmationResult;
+        console.log("----valueee", confirmationResult);
+
         // ...
       })
       .catch((error) => {
@@ -47,16 +49,6 @@ const App = ({ Component, ...rest }) => {
 
   return (
     <Provider store={store}>
-      {/* <button
-        id="recaptcha-container"
-        onClick={() => {
-          generateRecaptcha();
-          sendOTP();
-        }}
-      >
-        cclicck
-      </button> */}
-
       <Box component="main">
         <Header />
         <Toolbar />
