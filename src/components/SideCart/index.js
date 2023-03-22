@@ -9,29 +9,18 @@ import React, { memo, useRef } from "react";
 // import styled from 'styled-components';
 import CustomImage from "components/CustomImage";
 import { get, isEqual, map } from "lodash";
+import { useRouter } from "next/router";
 
 function SideCart({ data, cartData }) {
+  const history = useRouter();
   const globalTotal = useRef(0);
 
   const computeName = (key) => {
     return get(data?.[0], key, "");
   };
 
-  const filterData = () => {
-    const filterData = [];
-    let total = 0;
-    for (let i = 0; i < cartData?.length; i++) {
-      for (let j = 0; j < data?.length; j++) {
-        if (isEqual(get(data[j], "products_uuid"), cartData[i])) {
-          total += get(data[j], "price");
-          filterData.push(data[j]);
-        }
-      }
-    }
-
-    globalTotal.current = total;
-
-    return filterData;
+  const handleCheckout = () => {
+    history.push("/checkout");
   };
 
   return (
@@ -53,18 +42,31 @@ function SideCart({ data, cartData }) {
               "carModel.name"
             )} ${computeName("carFuel.name")}`}</p>
           </div>
-          {map(filterData(), (item, key) => (
-            <div key={key} className="card mt-2">
-              <div className="card-body">
-                <div className="d-flex justify-content-between">
-                  <h5>{get(item, "carService.name")}</h5>
-                  <p>{get(item, "price")}</p>
+          {map(cartData, (item, key) => {
+            globalTotal.current += get(item, "price", 0);
+            return (
+              <div key={key} className="card mt-2">
+                <div className="card-body">
+                  <div className="d-flex justify-content-between">
+                    <h5>{get(item, "carService.name")}</h5>
+                    <p>{get(item, "price")}</p>
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
           <div className="d-flex  justify-content-end ">
             <p>Total:- {globalTotal.current}</p>
+          </div>
+
+          <div className="row">
+            <button
+              onClick={handleCheckout}
+              type="button"
+              className="btn btn-success"
+            >
+              checkout
+            </button>
           </div>
         </div>
       </div>

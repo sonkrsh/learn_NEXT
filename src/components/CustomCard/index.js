@@ -17,12 +17,12 @@ function CustomCard({ data, handleAddToCart, cartData }) {
   const addToCart = async () => {
     setOpen(true);
 
-    handleAddToCart([data.products_uuid]);
+    handleAddToCart([data]);
   };
 
   const isButtonDisable = () => {
     const isfind = find(cartData, (item) => {
-      if (isEqual(get(data, "products_uuid"), item)) {
+      if (isEqual(get(data, "products_uuid"), item.products_uuid)) {
         return true;
       }
     });
