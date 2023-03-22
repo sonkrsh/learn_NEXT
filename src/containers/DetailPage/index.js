@@ -12,6 +12,7 @@ import { get, isEqual, map, filter } from "lodash";
 import Box from "@mui/material/Box";
 import CardContainer from "./CardContainer";
 import { addToCart, getLocalStorageData } from "./actions";
+import SideCart from "components/SideCart";
 
 export function DetailPage(props) {
   const {
@@ -80,16 +81,24 @@ export function DetailPage(props) {
           ))}
         </Tabs>
       </Box>
-      {map(tags, (item, index) => (
-        <TabPanel key={index} value={value} index={index}>
-          <CardContainer
-            data={filterProducts(get(item, "name", ""))}
-            handleAddToCart={handleAddToCart}
-            getLocalStorageData={getLocalStorageData}
-            cartData={cartData}
-          />
-        </TabPanel>
-      ))}
+      <div className="row">
+        <div className="col-sm-12 col-lg-8 col-xl-8">
+          {map(tags, (item, index) => (
+            <TabPanel key={index} value={value} index={index}>
+              <CardContainer
+                data={filterProducts(get(item, "name", ""))}
+                handleAddToCart={handleAddToCart}
+                getLocalStorageData={getLocalStorageData}
+                cartData={cartData}
+              />
+            </TabPanel>
+          ))}
+        </div>
+
+        <div className="d-none d-lg-block col-sm-0 col-lg-4 col-xl-4">
+          <SideCart data={products} cartData={cartData} />
+        </div>
+      </div>
     </>
   );
 }
