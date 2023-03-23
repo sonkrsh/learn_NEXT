@@ -4,7 +4,7 @@
  *
  */
 
-import React, { memo, useRef } from "react";
+import React, { memo, useRef, useEffect } from "react";
 // import PropTypes from 'prop-types';
 // import styled from 'styled-components';
 import CustomImage from "components/CustomImage";
@@ -16,7 +16,7 @@ function SideCart({ data, cartData }) {
   const globalTotal = useRef(0);
 
   const computeName = (key) => {
-    return get(data?.[0], key, "");
+    return get(cartData, key, "");
   };
 
   const handleCheckout = () => {

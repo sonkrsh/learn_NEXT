@@ -1,21 +1,11 @@
 import React from "react";
-import HomePage from "containers/HomePage/Loadable";
+import Checkout from "containers/Checkout/Loadable";
 import { END } from "redux-saga";
 import { wrapper } from "configureStore";
 import { getCarCompany } from "containers/HomePage/actions";
 
-const Checkout = () => {
-  return (
-    <>
-      <h2>Checkout</h2>
-    </>
-  );
+const CheckoutPage = () => {
+  return <Checkout />;
 };
 
-export const getStaticProps = wrapper.getStaticProps((store) => async () => {
-  await store.dispatch(getCarCompany());
-  await store.dispatch(END);
-  await store.sagaTask.toPromise();
-});
-
-export default Checkout;
+export default CheckoutPage;
