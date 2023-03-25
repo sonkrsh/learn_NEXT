@@ -1,7 +1,7 @@
 import { take, call, put, select, takeLatest } from "redux-saga/effects";
 import { GET_TAGS, GET_PRODUCTS, GET_LOCAL_STORAGE_DATA } from "./constants";
 import request from "utils/request";
-import { get } from "lodash";
+import { get, isEmpty } from "lodash";
 import { handleRoute } from "pages/actions";
 import localForage from "localforage";
 
@@ -43,6 +43,7 @@ function* getProducts({ payload }) {
 function* getLocalStorageData({ payload }) {
   try {
     const previousData = yield localForage.getItem("products");
+
     yield put(getLocalStorageDataSuccess(previousData));
   } catch (error) {}
 }
