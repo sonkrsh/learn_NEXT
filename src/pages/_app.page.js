@@ -9,6 +9,7 @@ import "bootstrap/dist/css/bootstrap.css";
 import "styles/global.scss";
 import authentication from "utils/firebase";
 import { RecaptchaVerifier, signInWithPhoneNumber } from "firebase/auth";
+import Message from "components/Message";
 
 const App = ({ Component, ...rest }) => {
   const { store, props } = wrapper.useWrappedStore(rest);
@@ -62,6 +63,7 @@ const App = ({ Component, ...rest }) => {
         <Header />
         <Toolbar />
         <Component {...pageProps} />
+        {/* <div id="snackbar"></div> */}
       </Box>
     </Provider>
   );

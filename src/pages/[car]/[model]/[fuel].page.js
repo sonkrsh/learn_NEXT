@@ -16,6 +16,7 @@ const page = () => {
 
 export const getServerSideProps = wrapper.getServerSideProps(
   (store) => async (context) => {
+    console.log("---cacll");
     await store.dispatch(getTags());
     await store.dispatch(getProducts(get(context, "query")));
     await store.dispatch(END);

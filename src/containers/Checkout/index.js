@@ -1,6 +1,5 @@
 /* eslint-disable react-hooks/rules-of-hooks */
-import React, { useEffect, useRef } from "react";
-import { createRoot } from "react-dom/client";
+import React, { useEffect, useState } from "react";
 
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
@@ -11,21 +10,22 @@ import makeSelectDetailPage from "containers/DetailPage/selectors";
 import makeSelectCheckout from "./selectors";
 import SideCart from "components/SideCart";
 
-import { useRouter } from "next/router";
-
 import { getLocalStorageData } from "containers/DetailPage/actions";
-import { isEmpty, toNumber, toString, get } from "lodash";
+import { toNumber, toString, get, slice, join } from "lodash";
 
 import { generateRecaptcha, sendOTP, verifyOTP } from "utils/firebase";
-import TextField from "@mui/material/TextField";
 import Otp from "components/Otp";
+import Message from "components/Message";
+
+import CustomButton from "components/CustomButton";
+import { userRegister } from "./actions";
 
 export function Checkout(props) {
-  const router = useRouter();
+  const [isOTPContainerSeen, setisOTPContainerSeen] = useState(false);
 
   const {
     getLocalStorageData,
-
+    handleUserRegister,
     detailPage: { cartData },
   } = props;
 
@@ -33,9 +33,18 @@ export function Checkout(props) {
     getLocalStorageData([]);
   }, []);
 
-  const handleSubmitOTP = (otp) => {
-    console.log("----", otp);
-    verifyOTP(otp);
+  const handleSubmitOTP = async (otp) => {
+    try {
+      const value = await verifyOTP(otp);
+      const combineNo = get(value, "user.phoneNumber");
+
+      const contact_no = join(slice(combineNo, 3, 13), "");
+      const country_code = join(slice(combineNo, 1, 3), "");
+
+      handleUserRegister({ country_code, contact_no });
+    } catch (error) {
+      alert(error);
+    }
   };
 
   const handleContinue = async (e) => {
@@ -47,18 +56,16 @@ export function Checkout(props) {
       return false;
     }
 
-    const isExists = document.getElementById("otp_container_nested");
-
-    if (!isExists) {
-      try {
-        const OTPresult = await sendOTP(phone_no);
-        createRoot(document.getElementById("otp_container")).render(
-          <Otp number={toString(phone_no)} handleSubmitOTP={handleSubmitOTP} />
-        );
-      } catch (error) {
-        alert(error);
-      }
+    try {
+      const OTPresult = await sendOTP(phone_no);
+      setisOTPContainerSeen(true);
+    } catch (error) {
+      alert(error);
     }
+  };
+
+  const handleUnmountRoot = () => {
+    setisOTPContainerSeen(false);
   };
 
   useEffect(() => {
@@ -77,21 +84,26 @@ export function Checkout(props) {
                   className="form-control"
                   id="phone_no"
                   placeholder="Enter Number"
+                  onChange={handleUnmountRoot}
                 />
               </div>
               <div className="col-sm-6">
-                <button
-                  id="recaptcha-container"
-                  onClick={handleContinue}
-                  type="submit"
-                  className="btn btn-primary"
-                >
-                  Continue
-                </button>
+                <CustomButton
+                  label="Continue"
+                  onClickHandler={handleContinue}
+                />
               </div>
             </div>
           </div>
-          <div id="otp_container"></div>
+
+          <div id="otp_container">
+            {isOTPContainerSeen && (
+              <Otp
+                number={toString(document.getElementById("phone_no")["value"])}
+                handleSubmitOTP={handleSubmitOTP}
+              />
+            )}
+          </div>
         </div>
       </div>
 
@@ -116,6 +128,7 @@ function mapDispatchToProps(dispatch) {
   return {
     dispatch,
     getLocalStorageData: (evt) => dispatch(getLocalStorageData(evt)),
+    handleUserRegister: (evt) => dispatch(userRegister(evt)),
   };
 }
 

@@ -19,7 +19,7 @@ function* getTags({ payload }) {
     };
     const response = yield call(request, options);
 
-    yield put(handleRoute("detailPage"));
+    // yield put(handleRoute("detailPage"));
     yield put(getTagsSuccess(get(response, "data.data")));
   } catch (error) {}
 }

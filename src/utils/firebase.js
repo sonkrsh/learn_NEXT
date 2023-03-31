@@ -35,7 +35,7 @@ export const sendOTP = async (contactNo, otpSendSuccess, otpSendFail) => {
   let appVerifier = window.recaptchaVerifier;
 
   return new Promise((resolve, reject) => {
-    signInWithPhoneNumber(authentication, `+91${contactNo}-`, appVerifier)
+    signInWithPhoneNumber(authentication, `+91${contactNo}`, appVerifier)
       .then((confirmationResult) => {
         window.confirmationResult = confirmationResult;
         resolve(confirmationResult);
